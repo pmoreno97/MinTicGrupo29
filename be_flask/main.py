@@ -69,7 +69,7 @@ def getCandidatos():
     return jsonify(json)
 
 
-@app.route("/mesas", methods=['POST'])
+@app.route("/candidatos", methods=['POST'])
 def crearCandidato():
     data = request.get_json()
     json = miControladorCandidato.create(data)
