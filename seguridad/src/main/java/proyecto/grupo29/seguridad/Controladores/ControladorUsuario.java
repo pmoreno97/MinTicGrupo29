@@ -30,6 +30,32 @@ public class ControladorUsuario {
         return this.miRepositorioUsuario.save(infoUsuario);
     }
 
+    @GetMapping("{id}")
+    public Usuario show(@PathVariable String id){
+        return this.miRepositorioUsuario.findById(id).orElse(null);
+    }
+
+    @PutMapping("{id}")
+    public Usuario update(@PathVariable String id, @RequestBody Usuario infoUsuario){
+        Usuario usuarioActual = miRepositorioUsuario.findById(id).orElse(null);
+        if (usuarioActual!=null && infoUsuario!=null){
+            usuarioActual.setSeudonimo(infoUsuario.getSeudonimo());
+            usuarioActual.setCorreo(infoUsuario.getCorreo());
+            usuarioActual.setContrasena(convertirSHA256(infoUsuario.getContrasena()));
+            return this.miRepositorioUsuario.save(usuarioActual);
+        } else {
+            return null;
+        }
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable String id){
+        Usuario usuarioActual = miRepositorioUsuario
+                .findById(id).orElse(null);
+        miRepositorioUsuario.delete(usuarioActual);
+    }
+
     public String convertirSHA256(String password){
         MessageDigest md = null;
         try {
