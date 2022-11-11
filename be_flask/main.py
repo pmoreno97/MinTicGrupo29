@@ -126,6 +126,11 @@ def eliminarPartido(id):
     json = miControladorPartido.delete(id)
     return jsonify(json)
 
+@app.route("/candidatos/<string:id>/partido/<string:id_partido>", methods=['PUT'])
+def asignarPartidoCandidato(id, id_partido):
+    json = miControladorCandidato.asignarPartido(id, id_partido)
+    return jsonify(json)
+
 
 if __name__ == '__main__':
     dataConfig = loadFileConfig()
