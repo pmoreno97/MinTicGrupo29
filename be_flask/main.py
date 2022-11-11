@@ -131,6 +131,33 @@ def asignarPartidoCandidato(id, id_partido):
     json = miControladorCandidato.asignarPartido(id, id_partido)
     return jsonify(json)
 
+@app.route("/resultados",methods=['GET'])
+def getResultados():
+    json=miControladorResultado.index()
+    return jsonify(json)
+
+@app.route("/resultados/<string:id>",methods=['GET'])
+def getResultado(id):
+    json=miControladorResultado.show(id)
+    return jsonify(json)
+
+@app.route("/resultados/candidato/<string:id_candidato>/mesa/<string:id_mesa>",methods=['POST'])
+def crearResultado(id_candidato,id_mesa):
+    data = request.get_json()
+    json=miControladorResultado.create(data,id_candidato,id_mesa)
+    return jsonify(json)
+
+@app.route("/resultados/<string:id_resultado>/candidato/<string:id_candidato>/mesa/<string:id_mesa>",methods=['PUT'])
+def modificarResultado(id_resultado,id_candidato,id_mesa):
+    data = request.get_json()
+    json=miControladorResultado.update(id_resultado,data,id_candidato,id_mesa)
+    return jsonify(json)
+
+@app.route("/resultados/<string:id_resultado>",methods=['DELETE'])
+def eliminarResultado(id_resultado):
+    json=miControladorResultado.delete(id_resultado)
+    return jsonify(json)
+
 
 if __name__ == '__main__':
     dataConfig = loadFileConfig()
