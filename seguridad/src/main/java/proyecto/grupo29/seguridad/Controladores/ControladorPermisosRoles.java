@@ -59,11 +59,10 @@ public class ControladorPermisosRoles {
      * @param id
      * @param id_rol
      * @param id_permiso
-     * @param infoPermisoRole
      * @return
      */
     @PutMapping("{id}/rol/{id_rol}/permiso/{id_permiso}")
-    public PermisosRoles create(@PathVariable String id, @PathVariable String id_rol, @PathVariable String id_permiso, @RequestBody PermisosRoles infoPermisoRole){
+    public PermisosRoles update(@PathVariable String id, @PathVariable String id_rol, @PathVariable String id_permiso){
         PermisosRoles permisoRolActual = this.miRepositorioPermisosRoles.findById(id).orElse(null);
         Permiso elPermiso = this.miRepositorioPermiso.findById(id_permiso).orElse(null);
         Rol elRol = this.miRepositorioRol.findById(id_rol).orElse(null);
