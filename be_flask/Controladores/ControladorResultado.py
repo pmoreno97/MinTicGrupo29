@@ -40,3 +40,15 @@ class ControladorResultado():
 
     def delete(self, id):
         return self.repositorioResultado.delete(id)
+
+    def listarResultadosCandidatos(self, id_candidato):
+        return self.repositorioResultados.getListadoResultadosPorCandidato(id_candidato)
+
+    def listarResultadosPorMesa(self, id_mesa):
+        return self.repositorioResultados.getListadoResultadosPorMesa(id_mesa)
+
+    def ganadorElecciones(self):
+        return self.repositorioResultados.getVotacionMasAlta()
+
+    def listaConsolidadosMesas(self):
+        return self.repositorioResultados.consolidadoMesas()

@@ -31,6 +31,10 @@ def test():
     json["message"] = "Server running ..."
     return jsonify(json)
 
+#####################################
+##           ENDPOINT MESAS        ##
+#####################################
+
 
 @app.route("/mesas", methods=['GET'])
 def getMesas():
@@ -61,7 +65,9 @@ def eliminarMesa(id):
     json = miControladorMesa.delete(id)
     return jsonify(json)
 
-
+#####################################
+##         ENDPOINT CANDIDATOS     ##
+#####################################
 
 @app.route("/candidatos", methods=['GET'])
 def getCandidatos():
@@ -94,7 +100,9 @@ def eliminarCandidato(id):
     json = miControladorCandidato.delete(id)
     return jsonify(json)
 
-
+#####################################
+##        ENDPOINT PARTIDOS        ##
+#####################################
 @app.route("/partidos", methods=['GET'])
 def getPartidos():
     json = miControladorPartido.index()
@@ -131,6 +139,11 @@ def asignarPartidoCandidato(id, id_partido):
     json = miControladorCandidato.asignarPartido(id, id_partido)
     return jsonify(json)
 
+#####################################
+##           ENDPOINT RESULTADOS    ##
+#####################################
+
+
 @app.route("/resultados",methods=['GET'])
 def getResultados():
     json=miControladorResultado.index()
@@ -157,6 +170,38 @@ def modificarResultado(id_resultado,id_candidato,id_mesa):
 def eliminarResultado(id_resultado):
     json=miControladorResultado.delete(id_resultado)
     return jsonify(json)
+
+###########################################################################33
+#
+#############################################################################
+
+#Buscar los candidatos votados en una mesa
+@app.route("/resultados/mesas/<string:id_mesa>", methods=["GET"])
+def inscritosMesa(id_mesa):
+    json = miControladorResultado.repositorioResultado.getListadoCandidatosInscritosMesa(id_mesa)
+    return jsonify(json)
+
+
+#Buscar el candidato en las mesas
+@app.route("/resultados/MESAS/<string:id_candidato>", methods=["GET"])
+def inscritoEnMesas(id_candidato):
+    json = miControladorResultado.repositorioResultado.getListadoMesasCandidatoInscrito(id_candidato)
+    return jsonify(json)
+
+
+#Buscar mayor votacion por mesa
+@app.route("/resultados/totalvotos", methods=["GET"])
+def getMaxDocument():
+    json = miControladorResultado.repositorioResultado.getNumeroCedulaMayorCandidato()
+    return jsonify(json)
+
+  #Busqueda de suma de votos por candidato
+
+@app.route("/resultados/suma_votos/candidatos/<string:id_candidato>", methods = ['GET'])
+def getSumaVotosCandidato(id_candidato):
+        json = miControladorResultado.repositorioResultado.sumaVotosCandidato(id_candidato)
+        return jsonify(json)
+
 
 
 if __name__ == '__main__':
