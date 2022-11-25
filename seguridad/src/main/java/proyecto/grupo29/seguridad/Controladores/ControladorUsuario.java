@@ -13,6 +13,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
@@ -94,4 +97,19 @@ public class ControladorUsuario {
             return null;
         }
     }
+    @PostMapping("/validar")
+    public Usuario validate(@RequestBody Usuario infoUsuario,
+                            final HttpServletResponse response) throws IOException {
+        Usuario usuarioActual=this.miRepositorioUsuario
+                .getUserByEmail(infoUsuario.getCorreo());
+        if (usuarioActual!=null &&
+                usuarioActual.getContrasena().equals(convertirSHA256(infoUsuario.getContrasena()))) {
+            usuarioActual.setContrasena("");
+            return usuarioActual;
+        }else{
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            return null;
+        }
+    }
+
 }
