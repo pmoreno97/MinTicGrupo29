@@ -117,6 +117,61 @@ def eliminarMesa(id):
 
 ##############################
 
+####################################partidos###################
+
+@app.route("/partidos",methods=['GET'])
+def getPartidos():
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/partidos'
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/partidos", methods=['POST'])
+def crearPartido():
+    data = request.get_json()
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/partidos'
+    response = requests.post(url, headers=headers, json=data)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/partidos/<string:id>", methods=['GET'])
+def getPartido(id):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/partidos/' + id
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/partidos/<string:id>", methods=['PUT'])
+def modificarPartido(id):
+    data = request.get_json()
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/partidos/' + id
+    response = requests.put(url, headers=headers, json=data)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/partidos/<string:id>", methods=['DELETE'])
+def eliminarPartido(id):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/partidos/' + id
+    response = requests.delete(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+
+@app.route("/candidatos/<string:id>/partido/<string:id_partido>", methods=['PUT'])
+def asignarPartidoCandidato(id,id_partido):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/candidatos/' + id + '/partido/' + id_partido
+    response = requests.put(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+##############################
+
 
 @app.route("/login", methods=["POST"])
 def create_token():
