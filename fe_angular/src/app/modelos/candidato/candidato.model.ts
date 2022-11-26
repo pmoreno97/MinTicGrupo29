@@ -1,4 +1,4 @@
-export class Candidatos {
+export class Candidato {
   _id?: string;
   cedula?: string;
   numero_resolucion?: string;
