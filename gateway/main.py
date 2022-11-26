@@ -172,6 +172,51 @@ def asignarPartidoCandidato(id,id_partido):
 
 ##############################
 
+####################################candidatos###################
+
+@app.route("/candidatos",methods=['GET'])
+def getCandidatos():
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/candidatos'
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/candidatos", methods=['POST'])
+def crearCandidato():
+    data = request.get_json()
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/candidatos'
+    response = requests.post(url, headers=headers, json=data)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/candidatos/<string:id>", methods=['GET'])
+def getCandidato(id):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/candidatos/' + id
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/candidatos/<string:id>", methods=['PUT'])
+def modificarCandidato(id):
+    data = request.get_json()
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/candidatos/' + id
+    response = requests.put(url, headers=headers, json=data)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/candidatos/<string:id>", methods=['DELETE'])
+def eliminarCandidato(id):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/candidatos/' + id
+    response = requests.delete(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+##############################
 
 @app.route("/login", methods=["POST"])
 def create_token():
