@@ -1,0 +1,22 @@
+<div class="my-3 mx-2 row">
+  <div class="col-sm-10">
+    <input type="text" class="form-control" #txtUsuario placeholder="Usuario" />
+  </div>
+</div>
+<div class="mb-3 mx-2 row">
+  <div class="col-sm-10">
+    <input
+      type="password"
+      class="form-control"
+      #txtContrasena
+      placeholder="Contraseña"
+    />
+  </div>
+</div>
+<button
+  type="button"
+  class="btn btn-warning mx-3"
+  (click)="validarUsuario(txtUsuario.value, txtContrasena.value)"
+>
+  Login
+</button>
