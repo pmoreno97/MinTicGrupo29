@@ -1,22 +1,30 @@
-<div class="my-3 mx-2 row">
+<div class="mt-3 text-center"><h2>Login</h2></div>
+<div class="my-3 mx-2 d-flex justify-content-center row">
   <div class="col-sm-10">
-    <input type="text" class="form-control" #txtUsuario placeholder="Usuario" />
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="correo"
+      placeholder="Usuario"
+    />
   </div>
 </div>
-<div class="mb-3 mx-2 row">
+<div class="mb-3 mx-2 row d-flex justify-content-center">
   <div class="col-sm-10">
     <input
       type="password"
       class="form-control"
-      #txtContrasena
+      [(ngModel)]="contrasena"
       placeholder="Contraseña"
     />
   </div>
 </div>
-<button
-  type="button"
-  class="btn btn-warning mx-3"
-  (click)="validarUsuario(txtUsuario.value, txtContrasena.value)"
->
-  Login
-</button>
+<div class="d-flex justify-content-center">
+  <button
+    type="submit"
+    class="btn btn-warning btn-block mx-3 px-5"
+    (click)="login()"
+  >
+    Login
+  </button>
+</div>
