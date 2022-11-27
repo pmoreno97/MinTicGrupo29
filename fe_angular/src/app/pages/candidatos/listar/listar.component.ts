@@ -11,7 +11,7 @@ import { CandidatoService } from '../../../servicios/candidato.service';
 export class ListarComponent implements OnInit {
   candidatos: Candidato[] = [];
   nombresColumnas: string[] = ['Cedula', 'Nombre', 'Apellido', 'Opciones'];
-  constructor(private miServicioCandidatos: CandidatoService) {}
+  constructor(private miServicioCandidatos: CandidatoService) { }
 
   ngOnInit(): void {
     this.listar();

@@ -1,1 +1,29 @@
-<p>listar works!</p>
+<div class="col-lg-12">
+  <div>
+    <div>
+      ADMINISTRACIÓN MESAS
+      <button type="button" class="btn btn-success" (click)="agregar()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+    <table class="table">
+      <tr>
+        <th *ngFor="let columaActual of nombresColumnas">{{ columaActual }}</th>
+      </tr>
+      <ng-container *ngFor="let mesaActual of mesas">
+        <tr>
+          <td>{{ mesaActual.numero }}</td>
+          <td>{{ mesaActual.cantidad_inscritos }}</td>
+          <td>
+            <button type="button" class="btn btn-primary">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button type="button" class="btn btn-danger">
+              <i class="fas fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</div>
